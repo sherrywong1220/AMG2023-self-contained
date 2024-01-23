@@ -15,8 +15,8 @@ CXX       = mpic++
 #CXX       = mpiicc
 #CXX       = CC
 
-LINK_CC   = ${CXX}
-LINK_CXX  = ${CXX}
+LINK_CC   = ${CXX} -static
+LINK_CXX  = ${CXX} -static
 
 AR	= ar -rcu
 RANLIB  = ranlib
@@ -29,7 +29,7 @@ INCLUDES = ${HYPRE_CUDA_INCLUDE} ${HYPRE_HIP_INCLUDE} ${MPIINCLUDE} ${HYPRE_UMPI
 ##################################################################
 ## Set path to hypre installation
 ##################################################################
-HYPRE_DIR = /usr/WS1/li50/hypre/releases/src/hypre
+HYPRE_DIR = /workspace/AMG2023-self-contained/hypre-2.30.0/src/hypre
 
 ##################################################################
 ##  MPI options - this is needed for Crusher, Tioga, RZVernal,
@@ -91,13 +91,13 @@ CXXINCLUDES = $(CINCLUDES) -I..
 CXXDEFS = $(CDEFS)
 CXXFLAGS  = $(COPTS) $(CINCLUDES) $(CDEFS)
 
-LIBS = -L$(HYPRE_DIR)/lib -lHYPRE $(XLINK) ${MPILIBS} -lm $(HYPRE_CUDA_LIBS) $(HYPRE_HIP_LIBS) ${HYPRE_UMPIRE_LIB_DIR} ${HYPRE_UMPIRE_LIB}
+LIBS = -L$(HYPRE_DIR)/lib -lHYPRE -lm
 #LIBS = -L$(HYPRE_DIR)/lib -lHYPRE $(XLINK) ${MPILIBS} $(HYPRE_HIP_LIBS)
 #LFLAGS = $(LINKOPTS) $(LIBS) -lstdc++
 
 XLINK = -Wl,-rpath,${HYPRE_DIR}/lib
 
-LFLAGS = $(LINKOPTS) $(LIBS) $(XLINK)
+LFLAGS = $(LIBS)
 
 ########################################################################
 # Rules for compiling the source files
