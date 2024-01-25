@@ -78,8 +78,8 @@ LINKOPTS =
 ########################################################################
 # MPI  and OpenMP threading
 ########################################################################
-#COPTS = -O2 -DHAVE_CONFIG_H -fopenmp
-#LINKOPTS = -fopenmp
+COPTS = -O2 -DHAVE_CONFIG_H -fopenmp
+LINKOPTS = -fopenmp
 #COPTS = -O2 -DHAVE_CONFIG_H -qsmp=omp
 #LINKOPTS = -qsmp=omp
 #COPTS = -O2 -DHAVE_CONFIG_H -qopenmp
@@ -97,7 +97,9 @@ LIBS = -L$(HYPRE_DIR)/lib -lHYPRE -lm
 
 XLINK = -Wl,-rpath,${HYPRE_DIR}/lib
 
-LFLAGS = $(LIBS)
+LFLAGS = $(LINKOPTS) $(LIBS)
+# LFLAGS = $(LIBS)
+
 
 ########################################################################
 # Rules for compiling the source files

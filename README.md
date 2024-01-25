@@ -47,12 +47,13 @@ cp mpicc  /usr/local/bin/
 ### Building HYPRE
 ```bash
 cd /workspace/AMG2023-self-contained/hypre-2.30.0/src
-./configure
+./configure --with-openmp
 make install
 ```
 
 ### Building Static Library for libudev
 ```bash
+cd /workspace/
 apt download libudev-dev
 dpkg-deb -x libudev-dev_249.11-0ubuntu3.12_arm64.deb libudev-dev
 cd libudev-dev/
